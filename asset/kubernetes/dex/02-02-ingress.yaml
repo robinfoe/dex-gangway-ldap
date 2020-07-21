@@ -1,0 +1,18 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: ing-dex-auth
+  namespace: tanzu-system-auth
+spec:
+  tls:
+    - hosts:
+      - dex.auth.app.local
+      secretName: dex-cert-tls
+  rules:
+    - host: dex.auth.app.local
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: dexsvc
+            servicePort: 80

@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ing-gangway-auth
+  namespace: tanzu-system-auth
+spec:
+  rules:
+  - host: gangway.auth.app.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName:  gangwaysvc
+          servicePort: 80  

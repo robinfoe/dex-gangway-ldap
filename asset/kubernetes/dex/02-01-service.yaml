@@ -1,0 +1,22 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dexsvc
+  namespace: tanzu-system-auth
+  labels:
+    app: dex
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+spec:
+  type: ClusterIP
+  ports:
+    - name: "https"
+      protocol: TCP
+      port: 443
+      targetPort: "https"
+    - name: "http"
+      protocol: TCP
+      port: 80
+      targetPort: "http"
+  selector:
+    app: dex

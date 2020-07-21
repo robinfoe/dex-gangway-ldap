@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ldap
+  name: ldap
+  namespace: tanzu-system-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ldap
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: ldap
+        revision: "1"
+    spec:
+      containers:
+      - args: ["--copy-service"]
+        image: osixia/openldap:1.4.0
+        imagePullPolicy: IfNotPresent
+        name: ldap
+        ports:
+        - containerPort: 389
+          name: ldap
+          protocol: TCP
+        - containerPort: 636
+          name: ldaps
+          protocol: TCP
+        resources: {}
+        volumeMounts:
+        # - name: ldap-config
+        #   mountPath: /container/service/slapd/assets/config/bootstrap/ldif/custom/
+        - name: ldap-data
+          mountPath: /var/lib/ldap
+        - name: ldap-config
+          mountPath: /etc/ldap/slapd.d
+        - name: ldap-certs
+          mountPath: /container/service/slapd/assets/certs
+        - name: ldif-config
+          mountPath: /container/service/slapd/assets/config/bootstrap/ldif/custom
+      volumes:
+      - name: ldif-config
+        configMap:
+          name: ldif-config
+      - name: ldap-data
+        emptyDir: {}
+      - name: ldap-config
+        emptyDir: {}
+      - name: ldap-certs
+        emptyDir: {}
+
+          

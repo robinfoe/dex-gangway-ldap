@@ -1,0 +1,22 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ldapsvc
+  namespace: tanzu-system-auth
+  labels:
+    app: ldap
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+spec:
+  type: ClusterIP
+  ports:
+    - name: "ldap"
+      protocol: TCP
+      port: 389
+      targetPort: "ldap"
+    - name: "ldaps"
+      protocol: TCP
+      port: 636
+      targetPort: "ldaps"
+  selector:
+    app: ldap
