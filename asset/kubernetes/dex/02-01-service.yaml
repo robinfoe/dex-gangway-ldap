@@ -10,13 +10,13 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - name: "https"
-      protocol: TCP
-      port: 443
-      targetPort: "https"
-    - name: "http"
-      protocol: TCP
-      port: 80
-      targetPort: "http"
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: https
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: http
   selector:
     app: dex

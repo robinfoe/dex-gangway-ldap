@@ -1,0 +1,11 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:yaml", "yaml")
+#@ load("config/config-gen.lib.yaml", "gangway_config")
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gangway
+  namespace: #@ data.values.namespace
+data:
+  gangway.yaml: #@ yaml.encode(gangway_config())

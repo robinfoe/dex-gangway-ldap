@@ -1,0 +1,11 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:yaml", "yaml")
+#@ load("config/config-gen.lib.yaml", "dex_config")
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dex
+  namespace: tanzu-system-auth
+data:
+  config.yaml: #@ yaml.encode(dex_config())

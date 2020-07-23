@@ -1,0 +1,15 @@
+#@ load("@ytt:data", "data")
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ing-gangway-auth
+  namespace: #@ data.values.namespace  
+spec:
+  rules:
+  - host: #@ data.values.gangway.host  
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName:  gangwaysvc
+          servicePort: 80  

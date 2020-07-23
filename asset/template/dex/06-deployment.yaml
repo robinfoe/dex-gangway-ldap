@@ -1,10 +1,11 @@
+#@ load("@ytt:data", "data")
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app: dex
   name: dex
-  namespace: tanzu-system-auth
+  namespace:  #@ data.values.namespace  
 spec:
   replicas: 1
   selector:
@@ -26,17 +27,6 @@ spec:
         - /usr/local/bin/dex
         - serve
         - /etc/dex/cfg/config.yaml
-        env:
-        - name: OIDC_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              key: clientId
-              name: oidc
-        - name: OIDC_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: clientSecret
-              name: oidc
         image: vmware-docker-tkg.bintray.io/dex:v2.22.0_vmware.1
         imagePullPolicy: IfNotPresent
         name: dex
@@ -66,10 +56,6 @@ spec:
             path: config.yaml
           name: dex
         name: config
-      - name: oidc
-        secret:
-          defaultMode: 420
-          secretName: oidc
       - name: tls
         secret:
           secretName: dex-cert-tls

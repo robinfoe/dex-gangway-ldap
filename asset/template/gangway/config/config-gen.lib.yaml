@@ -1,0 +1,16 @@
+#@ load("@ytt:data", "data")
+#@ def gangway_config():
+serveTLS: false
+certFile: /tls/tls.crt
+keyFile: /tls/tls.key
+clusterName: #@ data.values.static.client.id
+authorizeURL: #@ "http://" + data.values.dex.host + ":" + data.values.dex.port + "/auth"
+tokenURL: #@ data.values.dex.tokenUrl
+scopes: ["openid", "profile", "email", "offline_access"]
+redirectURL: #@ "http://" + data.values.gangway.host + ":" + data.values.gangway.port + "/callback"
+clientID: #@ data.values.static.client.id
+usernameClaim: "email"
+apiServerURL: #@ data.values.kube.api
+trustedCAPath: /etc/dex/dex-ca.crt
+idpCAPath: /etc/dex/dex-ca.crt
+#@ end

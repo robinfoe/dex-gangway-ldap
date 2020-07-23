@@ -95,8 +95,8 @@ function kind::cluster::make(){
     fi
 
     kind::cluster::deploy::contour
-    kind::cluster::deploy::dex
-    kind::cluster::deploy::ldap
+    # kind::cluster::deploy::dex
+    # kind::cluster::deploy::ldap
 }
 
 

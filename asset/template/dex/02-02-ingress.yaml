@@ -1,0 +1,19 @@
+#@ load("@ytt:data", "data")
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: ing-dex-auth
+  namespace: #@ data.values.namespace  
+spec:
+  tls:
+    - hosts:
+      - #@ data.values.dex.host   
+      secretName: dex-cert-tls
+  rules:
+    - host: #@ data.values.dex.host   
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: dexsvc
+            servicePort: 80

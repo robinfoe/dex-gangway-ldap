@@ -10,5 +10,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName:  gangwaysvc
-          servicePort: 80  
+          serviceName: gangwaysvc
+          servicePort: 80

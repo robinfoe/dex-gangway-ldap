@@ -1,8 +1,9 @@
+#@ load("@ytt:data", "data")
 kind: Service
 apiVersion: v1
 metadata:
   name: gangwaysvc
-  namespace: tanzu-system-auth
+  namespace: #@ data.values.namespace  
   labels:
     app: gangway
   annotations:
@@ -10,9 +11,9 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - name: http
-    protocol: TCP
-    port: 80
-    targetPort: http
+    - name: "http"
+      protocol: TCP
+      port: 80
+      targetPort: "http"
   selector:
     app: gangway

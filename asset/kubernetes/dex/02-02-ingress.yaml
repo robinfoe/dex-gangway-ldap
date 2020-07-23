@@ -5,14 +5,14 @@ metadata:
   namespace: tanzu-system-auth
 spec:
   tls:
-    - hosts:
-      - dex.auth.app.local
-      secretName: dex-cert-tls
+  - hosts:
+    - dex.auth.app.local
+    secretName: dex-cert-tls
   rules:
-    - host: dex.auth.app.local
-      http:
-        paths:
-        - path: /
-          backend:
-            serviceName: dexsvc
-            servicePort: 80
+  - host: dex.auth.app.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: dexsvc
+          servicePort: 80

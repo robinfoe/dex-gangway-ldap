@@ -1,0 +1,22 @@
+#@data/values
+---
+namespace: tanzu-system-auth
+dex:
+  host: dex.auth.app.local    
+  port: '9480'
+gangway:
+  host: gangway.auth.app.local
+  port: '9480'
+ldap:
+  host: ldapsvc
+  port: '389'
+static:
+  client:
+    id: tanzu
+    secret: tanzu-security
+            
+
+
+
+    
+        
