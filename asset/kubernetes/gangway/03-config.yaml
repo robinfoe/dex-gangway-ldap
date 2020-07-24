@@ -16,7 +16,7 @@ data:
     - profile
     - email
     - offline_access
-    redirectURL: http://dex.auth.app.local:9480/callback
+    redirectURL: http://gangway.auth.app.local:9480/callback
     clientID: tanzu
     usernameClaim: email
     apiServerURL: https://127.0.0.1:9643/

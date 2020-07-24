@@ -24,7 +24,7 @@ spec:
   keyEncoding: pkcs1
   dnsNames:
   - tkg-gangway
-  - dex.auth.app.local
+  - gangway.auth.app.local
   issuerRef:
     name: gangway-ca-issuer
     kind: Issuer
